@@ -1,7 +1,5 @@
 const os = require('os');
 const bytes = require('bytes');
-const { log } = require('console');
-const formatter = new Intl.DurationFormat("fr-FR", { style: "long" });
 
 async function getStats() {
     try{
@@ -25,12 +23,12 @@ async function getStats() {
          
          
           ////////////////////////////// Operating Sys ////////////////////////
-          const uptime_b = os.uptime
-          const plateform = os.platform
-          const type = os.type
-          const version = os.release
+          const uptime_b = os.uptime() 
+          const plateform = os.platform()
+          const type = os.type()
+          const version = os.release()
 
-          const uptime = {seconds: uptime_b};
+          const uptime = `${Math.round(uptime_b / 60)} minutes`;
           
 
     /////////////////////////////////////////////////////////////////////
