@@ -1,692 +1,692 @@
 {
   "ERR_SYS_001": {
-    "name": "Fichier de configuration introuvable",
+    "name": "ENOENT",
     "level": "FATAL",
-    "explanation": "Le fichier 'config.json' ou '.env' est absent de la racine de l'application.",
-    "fix": "Copiez le fichier d'exemple '.env.example', renommez-le en '.env' et configurez vos variables."
+    "explanation": "Le fichier ou le répertoire de configuration requis est introuvable à l'emplacement indiqué.",
+    "fix": "Vérifiez que le fichier '.env' ou 'config.json' existe à la racine et que son chemin est valide."
   },
   "ERR_SYS_002": {
-    "name": "Mémoire insuffisante (OOM)",
+    "name": "ERR_WORKER_OUT_OF_MEMORY",
     "level": "FATAL",
-    "explanation": "Le processus a dépassé la limite de mémoire vive (RAM) allouée au runtime.",
-    "fix": "Augmentez la mémoire maximale avec l'option --max-old-space-size ou optimisez les fuites de mémoire."
+    "explanation": "Le processus ou le thread enfant a épuisé la mémoire vive (RAM) qui lui était allouée.",
+    "fix": "Augmentez la mémoire allouée au runtime avec --max-old-space-size ou corrigez les fuites de mémoire."
   },
   "ERR_SYS_003": {
-    "name": "Droits d'écriture refusés (EACCES)",
+    "name": "EACCES",
     "level": "FATAL",
-    "explanation": "L'application tente d'écrire dans un répertoire système verrouillé ou protégé.",
-    "fix": "Modifiez les privilèges du dossier via chmod/chown ou exécutez l'application avec un utilisateur dédié."
+    "explanation": "Les permissions système actuelles interdisent l'accès ou l'écriture dans ce répertoire.",
+    "fix": "Modifiez les privilèges du dossier via chmod/chown ou lancez le script avec un utilisateur autorisé."
   },
   "ERR_SYS_004": {
-    "name": "Version de Node.js incompatible",
+    "name": "ERR_INCOMPATIBLE_NODE_VERSION",
     "level": "FATAL",
-    "explanation": "La version actuelle du runtime ne respecte pas les contraintes strictes du projet.",
-    "fix": "Mettez à jour Node.js vers la version LTS recommandée à l'aide de nvm (Node Version Manager)."
+    "explanation": "La version de Node.js détectée sur la machine hôte ne respecte pas les contraintes du projet.",
+    "fix": "Basculez vers la version LTS recommandée en utilisant un gestionnaire de version comme nvm."
   },
   "ERR_SYS_005": {
-    "name": "Espace disque saturé",
+    "name": "ENOSPC",
     "level": "FATAL",
-    "explanation": "Le stockage local est plein, empêchant l'écriture de logs ou de fichiers temporaires.",
-    "fix": "Nettoyez les fichiers temporaires du serveur ou étendez le volume du disque dur."
+    "explanation": "L'espace de stockage sur le disque dur est totalement saturé.",
+    "fix": "Libérez de l'espace sur le serveur en nettoyant les fichiers temporaires ou étendez le volume disque."
   },
   "ERR_SYS_006": {
-    "name": "Architecture CPU non supportée",
+    "name": "ERR_DLOPEN_FAILED",
     "level": "FATAL",
-    "explanation": "L'application utilise des binaires compilés exclusifs à une architecture CPU différente (ex: x86 vs ARM).",
-    "fix": "Déployez l'application dans un conteneur ou un environnement compatible avec l'architecture cible."
+    "explanation": "Impossible de charger un module binaire natif compilé (.node).",
+    "fix": "Supprimez le dossier 'node_modules' et relancez 'npm install' pour recompiler les dépendances natives."
   },
   "ERR_SYS_007": {
-    "name": "Échec de chargement du module natif",
+    "name": "EMFILE",
     "level": "ERROR",
-    "explanation": "Une dépendance binaire (C++) n'a pas pu être liée ou compilée correctement lors de l'installation.",
-    "fix": "Exécutez la commande 'npm rebuild' ou supprimez le dossier node_modules et relancez 'npm install'."
+    "explanation": "Trop de fichiers ou de descripteurs réseau sont ouverts en même temps par l'application.",
+    "fix": "Assurez-vous de bien fermer les flux (streams) après usage ou augmentez la limite système avec 'ulimit -n'."
   },
   "ERR_SYS_008": {
-    "name": "Fichier de certificat SSL corrompu",
+    "name": "EISDIR",
     "level": "ERROR",
-    "explanation": "Le fichier .pem ou .crt requis pour le serveur HTTPS est illisible ou mal encodé.",
-    "fix": "Générez à nouveau vos certificats de sécurité ou validez le chemin d'accès absolu."
+    "explanation": "Une opération exclusive aux fichiers a été tentée sur un répertoire.",
+    "fix": "Modifiez le chemin cible pour pointer vers un fichier valide et non vers un dossier."
   },
   "ERR_SYS_009": {
-    "name": "Lien symbolique rompu",
+    "name": "ENOTDIR",
     "level": "ERROR",
-    "explanation": "L'application pointe vers un lien symbolique dont la cible d'origine a été déplacée.",
-    "fix": "Recréez manuellement le lien symbolique pour qu'il pointe vers la bonne destination finale."
+    "explanation": "Une opération exclusive aux répertoires a été tentée sur un composant qui n'est pas un dossier.",
+    "fix": "Vérifiez la structure de votre chemin d'accès pour vous assurer que le parent est bien un répertoire."
   },
   "ERR_SYS_010": {
-    "name": "Descripteurs de fichiers épuisés (EMFILE)",
+    "name": "EPERM",
     "level": "ERROR",
-    "explanation": "L'application a ouvert trop de fichiers ou de sockets simultanément sans les refermer.",
-    "fix": "Fermez correctement tous les flux (streams) après usage ou augmentez la limite système avec 'ulimit -n'."
+    "explanation": "L'opération requiert des privilèges élevés ou administrateur non détenus par l'application.",
+    "fix": "Vérifiez les règles de sécurité de l'OS ou exécutez le script avec des droits d'administration adaptés."
   },
   "ERR_SYS_011": {
-    "name": "Variable d'environnement obligatoire manquante",
+    "name": "ERR_MISSING_ARGS",
     "level": "ERROR",
-    "explanation": "Une variable système critique (ex: APP_KEY) nécessaire au chiffrement n'est pas définie.",
-    "fix": "Ajoutez la variable d'environnement manquante dans votre gestionnaire de secrets ou votre fichier de configuration."
+    "explanation": "Une fonction interne critique ou une commande système a été appelée sans ses arguments obligatoires.",
+    "fix": "Inspectez la signature de la fonction et assurez-vous de lui passer tous les paramètres requis."
   },
   "ERR_SYS_012": {
-    "name": "Flux de streaming audio/vidéo rompu",
+    "name": "EEXIST",
     "level": "ERROR",
-    "explanation": "Le pipeline de transmission multimédia en continu s'est arrêté de manière inattendue.",
-    "fix": "Relancez le chargement du buffer ou basculez automatiquement sur un flux alternatif de plus basse qualité."
+    "explanation": "Tentative de création d'un fichier ou d'un dossier à un emplacement où un élément porte déjà ce nom.",
+    "fix": "Ajoutez une vérification d'existence en amont ou modifiez le nom de la cible à créer."
   },
   "ERR_SYS_013": {
-    "name": "Dossier temporaire introuvable",
+    "name": "EBUSY",
     "level": "WARN",
-    "explanation": "Le répertoire configuré pour stocker les fichiers téléversés temporairement n'existe pas.",
-    "fix": "Le système va créer automatiquement le dossier ou utiliser le répertoire temporaire par défaut de l'OS."
+    "explanation": "Le fichier ciblé est actuellement verrouillé par un autre processus ou par le système d'exploitation.",
+    "fix": "Patientez avant de relancer l'opération ou configurez un mécanisme de réessai asynchrone."
   },
   "ERR_SYS_014": {
-    "name": "Fichier de log verrouillé",
+    "name": "ENOTEMPTY",
     "level": "WARN",
-    "explanation": "Un autre processus système utilise ou analyse activement le fichier de log principal.",
-    "fix": "Attendez la libération du descripteur de fichier ou passez à un flux d'écriture asynchrone non bloquant."
+    "explanation": "Tentative de suppression d'un dossier qui contient encore des fichiers ou des sous-répertoires.",
+    "fix": "Utilisez une suppression récursive (comme fs.rm avec l'option { recursive: true })."
   },
   "ERR_SYS_015": {
-    "name": "Dépréciation d'une variable de configuration",
+    "name": "ERR_MODULE_NOT_FOUND",
     "level": "WARN",
-    "explanation": "Une clé de configuration obsolète est encore détectée dans les fichiers de l'application.",
-    "fix": "Remplacez la clé obsolète par sa nouvelle déclinaison spécifiée dans la documentation technique."
+    "explanation": "Un module requis via un import ou un require est introuvable dans node_modules.",
+    "fix": "Installez la dépendance manquante à l'aide de votre gestionnaire de paquets (npm, yarn, pnpm)."
   },
   "ERR_SYS_016": {
-    "name": "Processus zombie détecté",
+    "name": "ERR_INVALID_ARG_TYPE",
     "level": "WARN",
-    "explanation": "Un sous-processus fork() lancé par l'application ne s'est pas terminé proprement.",
-    "fix": "Le gestionnaire de tâches interne va forcer l'arrêt (SIGKILL) du processus enfant orphelin."
+    "explanation": "Un argument passé à une fonction native JS possède un type invalide.",
+    "fix": "Validez et convertissez les données en amont du passage d'argument à l'API native."
   },
   "ERR_SYS_017": {
-    "name": "Création automatique du dossier de logs",
+    "name": "ERR_UNKNOWN_SIGNAL",
     "level": "INFO",
-    "explanation": "Le répertoire spécifié pour les logs n'existait pas et a été initialisé au démarrage.",
-    "fix": "Aucune action requise. Vérifiez simplement que l'écriture se déroule normalement."
+    "explanation": "Le processus a reçu un signal d'interruption système inconnu ou non géré par l'application.",
+    "fix": "Aucune action requise, sauf si le signal provoque des arrêts inattendus de la plateforme."
   },
   "ERR_AUTH_001": {
-    "name": "Clé de chiffrement maître compromise ou invalide",
+    "name": "ERR_CRYPTO_INITIALIZATION_FAILED",
     "level": "FATAL",
-    "explanation": "La clé de chiffrement principale utilisée pour masquer les données sensibles est corrompue.",
-    "fix": "Restaurez la clé secrète originale depuis votre coffre-fort de secrets (ex: Vault, AWS Secrets Manager)."
+    "explanation": "Le sous-système de cryptographie n'a pas pu s'initialiser, souvent en raison d'une clé maître corrompue.",
+    "fix": "Restaurez la clé secrète originale depuis votre gestionnaire de secrets sécurisé."
   },
   "ERR_AUTH_002": {
-    "name": "Jeton JWT expiré",
+    "name": "ERR_AUTH_TOKEN_EXPIRED",
     "level": "ERROR",
-    "explanation": "Le jeton d'accès fourni par le client a dépassé sa date limite de validité.",
-    "fix": "Le client doit envoyer un refresh token ou inviter l'utilisateur à s'authentifier de nouveau."
+    "explanation": "Le jeton d'accès JWT fourni par l'utilisateur a dépassé sa date limite de validité.",
+    "fix": "Le client doit envoyer un refresh token valide ou inviter l'utilisateur à se réauthentifier."
   },
   "ERR_AUTH_003": {
-    "name": "Signature JWT invalide",
+    "name": "ERR_AUTH_INVALID_SIGNATURE",
     "level": "ERROR",
-    "explanation": "Le jeton a été altéré en cours de route ou signé avec une clé différente de celle du serveur.",
-    "fix": "Rejetez immédiatement la requête. Le client doit régénérer un jeton d'authentification sain."
+    "explanation": "La signature cryptographique du jeton JWT ne correspond pas à la clé du serveur.",
+    "fix": "Rejetez immédiatement la requête. L'utilisateur tente d'utiliser un jeton corrompu ou falsifié."
   },
   "ERR_AUTH_004": {
-    "name": "Permissions insuffisantes (RBAC)",
+    "name": "ERR_AUTH_INSUFFICIENT_PERMISSIONS",
     "level": "ERROR",
-    "explanation": "L'utilisateur est authentifié mais son rôle ne lui permet pas d'accéder à cette ressource.",
-    "fix": "Attribuez le rôle adéquat à l'utilisateur depuis l'interface d'administration si l'action est légitime."
+    "explanation": "L'utilisateur est authentifié mais son rôle ou ses privilèges ne l'autorisent pas à accéder à cette route.",
+    "fix": "Modifiez les rôles ou attribuez les scopes manquants à l'utilisateur si la demande est légitime."
   },
   "ERR_AUTH_005": {
-    "name": "Compte utilisateur verrouillé",
+    "name": "ERR_AUTH_ACCOUNT_LOCKED",
     "level": "ERROR",
-    "explanation": "Le compte a été suspendu suite à un trop grand nombre d'échecs de connexion consécutifs.",
-    "fix": "Attendez la fin du verrouillage temporel ou déclenchez un lien de déverrouillage manuel par email."
+    "explanation": "Le compte utilisateur a été temporairement verrouillé à la suite de trop nombreux échecs d'authentification.",
+    "fix": "Attendez la fin du délai de sécurité ou déclenchez manuellement un email de déverrouillage de compte."
   },
   "ERR_AUTH_006": {
-    "name": "Identifiants de connexion incorrects",
+    "name": "ERR_AUTH_BAD_CREDENTIALS",
     "level": "ERROR",
-    "explanation": "Le couple email/mot de passe fourni ne correspond à aucun utilisateur actif en base.",
-    "fix": "Retournez une erreur générique au client par sécurité et proposez une réinitialisation de mot de passe."
+    "explanation": "L'association de l'identifiant et du mot de passe soumis ne correspond à aucun compte valide.",
+    "fix": "Retournez une réponse générique d'erreur pour éviter l'énumération de comptes."
   },
   "ERR_AUTH_007": {
-    "name": "Code MFA / TOTP invalide",
+    "name": "ERR_AUTH_MFA_CODE_INVALID",
     "level": "ERROR",
-    "explanation": "Le code de double authentification saisi par l'utilisateur est erroné ou a expiré.",
-    "fix": "Demandez à l'utilisateur de vérifier l'heure de son appareil et de saisir le nouveau code généré."
+    "explanation": "Le code de double authentification (TOTP) saisi par l'utilisateur est erroné.",
+    "fix": "Invitez l'utilisateur à vérifier l'heure de son smartphone et à renseigner le nouveau code affiché."
   },
   "ERR_AUTH_008": {
-    "name": "Session révoquée",
+    "name": "ERR_AUTH_SESSION_REVOKED",
     "level": "ERROR",
-    "explanation": "La session active de l'utilisateur a été invalidée ou détruite depuis le serveur.",
-    "fix": "Redirigez immédiatement le client vers la page de connexion principale."
+    "explanation": "La session active liée à ce jeton a été explicitement détruite ou révoquée depuis le serveur.",
+    "fix": "Invalidez le cookie ou le token local du client et redirigez l'utilisateur vers la mire de connexion."
   },
   "ERR_AUTH_009": {
-    "name": "Origine Cross-Origin (CORS) refusée",
+    "name": "ERR_CORS_ORIGIN_NOT_ALLOWED",
     "level": "ERROR",
-    "explanation": "L'en-tête 'Origin' du navigateur client ne fait pas partie des domaines autorisés par l'API.",
-    "fix": "Ajoutez le domaine client dans la configuration CORS du serveur si la requête est légitime."
+    "explanation": "Le domaine émetteur de la requête navigateur n'est pas autorisé par la politique CORS de l'API.",
+    "fix": "Ajoutez l'URL exacte du client dans la liste blanche de la configuration CORS du serveur d'API."
   },
   "ERR_AUTH_010": {
-    "name": "Jeton CSRF manquant ou invalide",
+    "name": "ERR_CSRF_TOKEN_MISMATCH",
     "level": "ERROR",
-    "explanation": "La requête HTTP d'écriture ne contient pas le jeton de protection contre la falsification.",
-    "fix": "Assurez-vous que le client transmet le jeton CSRF requis dans les en-têtes ou le corps de la requête."
+    "explanation": "Le jeton de sécurité de protection contre les attaques CSRF est manquant ou ne correspond pas à la session.",
+    "fix": "Assurez-vous que votre client transmet correctement le jeton CSRF au sein de ses en-têtes HTTP."
   },
   "ERR_AUTH_011": {
-    "name": "Jeton d'API introuvable",
+    "name": "ERR_AUTH_MISSING_API_KEY",
     "level": "ERROR",
-    "explanation": "La requête publique ne contient pas l'en-tête 'X-API-Key' ou le token Bearer associé.",
-    "fix": "Fournissez une clé d'API valide générée depuis votre espace développeur dans les headers."
+    "explanation": "L'en-tête d'authentification requis pour les applications tierces (ex: X-API-Key) est absent.",
+    "fix": "Générez une clé d'API valide depuis l'espace développeur et intégrez-la dans les requêtes sortantes."
   },
   "ERR_AUTH_012": {
-    "name": "Utilisateur banni de la plateforme",
+    "name": "ERR_AUTH_USER_BANNED",
     "level": "ERROR",
-    "explanation": "L'accès est strictement refusé car ce compte a été banni pour non-respect des conditions d'utilisation.",
-    "fix": "Affichez un message explicite sur l'interface et fournissez un lien pour contacter le support client."
+    "explanation": "L'accès à la plateforme est révoqué car cet utilisateur a été banni pour non-respect des règles.",
+    "fix": "Affichez un message explicite sur l'interface utilisateur et bloquez la génération de nouvelles sessions."
   },
   "ERR_AUTH_013": {
-    "name": "Clé d'activation déjà utilisée",
+    "name": "ERR_AUTH_LINK_ALREADY_USED",
     "level": "ERROR",
-    "explanation": "Le jeton d'activation ou de validation de compte envoyé par email a déjà été consommé.",
-    "fix": "Invitez l'utilisateur à se connecter directement ou à demander l'envoi d'un nouveau lien."
+    "explanation": "Le jeton à usage unique de validation d'adresse email ou de réinitialisation a déjà été consommé.",
+    "fix": "Proposez à l'utilisateur de générer un tout nouveau lien sécurisé depuis l'interface."
   },
   "ERR_AUTH_014": {
-    "name": "Tentative d'accès par force brute",
+    "name": "ERR_RATE_LIMIT_LOGIN_ATTEMPTS",
     "level": "WARN",
-    "explanation": "Une adresse IP tente de se connecter en boucle sur plusieurs comptes distincts.",
-    "fix": "Le système applique un bannissement IP temporaire (Rate Limiting) via un middleware de sécurité."
+    "explanation": "Une activité suspecte s'apparentant à de la force brute a été détectée sur une adresse IP.",
+    "fix": "Appliquez un blocage IP temporaire via un middleware de limitation de requêtes."
   },
   "ERR_AUTH_015": {
-    "name": "Mot de passe jugé trop faible",
+    "name": "ERR_AUTH_WEAK_PASSWORD",
     "level": "WARN",
-    "explanation": "Le mot de passe choisi dans le formulaire ne valide pas les critères de complexité requis.",
-    "fix": "Exigez l'inclusion de majuscules, de minuscules, de chiffres et de caractères spéciaux."
+    "explanation": "Le mot de passe choisi ne valide pas les critères de sécurité minimaux de la plateforme.",
+    "fix": "Exigez l'intégration de majuscules, minuscules, chiffres et caractères spéciaux dans le formulaire."
   },
-"ERR_AUTH_016": {
-"name": "Utilisation d'un protocole HTTP non sécurisé",
-"level": "WARN",
-"explanation": "Une requête contenant des données sensibles a été transmise hors du canal chiffré SSL.",
-"fix": "Configurez une redirection automatique 301 de HTTP vers HTTPS au niveau de votre reverse proxy."
-},
-"ERR_AUTH_017": {
-"name": "Changement de mot de passe réussi",
+  "ERR_AUTH_016": {
+    "name": "ERR_HTTP_INSECURE_CONNECTION",
+    "level": "WARN",
+    "explanation": "Des données sensibles transitent via le protocole non sécurisé HTTP plutôt que HTTPS.",
+    "fix": "Forcez une redirection systématique HTTP 301 vers HTTPS au niveau de votre infrastructure."
+  },
+  "ERR_AUTH_017": {
+"name": "ERR_AUTH_PASSWORD_CHANGED",
 "level": "INFO",
-"explanation": "L'utilisateur a mis à jour ses identifiants de connexion avec succès.",
-"fix": "Envoyez une notification de confirmation par email pour avertir l'utilisateur par mesure de sécurité."
+"explanation": "Le mot de passe de l'utilisateur a été mis à jour avec succès en base de données.",
+"fix": "Envoyez une alerte de sécurité par email à l'utilisateur pour valider qu'il est bien à l'origine de l'action."
 },
 "ERR_DB_001": {
-"name": "Échec de connexion au serveur de base de données",
+"name": "ERR_DB_CONNECTION_FAILED",
 "level": "FATAL",
-"explanation": "L'application ne parvient pas à joindre le serveur de stockage SQL/NoSQL.",
-"fix": "Vérifiez l'état du service de base de données, l'adresse de l'hôte et l'état de votre pare-feu."
+"explanation": "L'application ne parvient pas à établir un lien réseau initial avec le serveur de base de données.",
+"fix": "Vérifiez que le serveur SQL/NoSQL est démarré et que l'adresse de l'hôte est correcte."
 },
 "ERR_DB_002": {
-"name": "Authentification échouée sur la base de données",
+"name": "ERR_DB_AUTHENTICATION_FAILED",
 "level": "FATAL",
-"explanation": "L'identifiant ou le mot de passe de l'utilisateur de la base de données est rejeté.",
-"fix": "Mettez à jour les secrets de connexion de la base de données dans la configuration de l'application."
+"explanation": "Le nom d'utilisateur ou le mot de passe de connexion à la base de données a été rejeté.",
+"fix": "Contrôlez et mettez à jour les secrets de connexion de la base de données dans vos variables système."
 },
 "ERR_DB_003": {
-"name": "Version de base de données obsolète",
+"name": "ERR_DB_UNSUPPORTED_VERSION",
 "level": "FATAL",
-"explanation": "Le moteur de base de données ne supporte pas les fonctionnalités SQL de l'ORM actuel.",
-"fix": "Mettez à niveau le serveur de base de données vers la version minimale requise par l'application."
+"explanation": "Le moteur de la base de données est trop ancien pour exécuter les requêtes générées par l'ORM.",
+"fix": "Procédez à la mise à niveau du serveur de données vers une version compatible avec l'application."
 },
 "ERR_DB_004": {
-"name": "Violation de contrainte d'unicité",
+"name": "ERR_DB_UNIQUE_VIOLATION",
 "level": "ERROR",
-"explanation": "Tentative d'insertion d'un enregistrement possédant une clé dupliquée (ex: même email).",
-"fix": "Vérifiez l'existence de la donnée en amont ou attrapez l'exception pour avertir poliment l'utilisateur."
+"explanation": "Tentative d'insertion d'une donnée qui enfreint une contrainte d'unicité (ex: doublon d'email).",
+"fix": "Interceptez l'erreur logiciellement pour renvoyer un message d'aide explicite à l'utilisateur."
 },
 "ERR_DB_005": {
-"name": "Deadlock détecté (Verrouillage mutuel)",
+"name": "ERR_DB_DEADLOCK_DETECTED",
 "level": "ERROR",
-"explanation": "Deux transactions s'attendent mutuellement en bloquant l'exécution globale de la requête.",
-"fix": "Le moteur a annulé la transaction. Mettez en place une logique de réessai automatique (retry)."
+"explanation": "Deux requêtes ou transactions simultanées se bloquent mutuellement au niveau du moteur de données.",
+"fix": "Le serveur de données annule l'une des requêtes. Mettez en place une politique de réessai automatique."
 },
 "ERR_DB_006": {
-"name": "Violation de clé étrangère",
+"name": "ERR_DB_FOREIGN_KEY_VIOLATION",
 "level": "ERROR",
-"explanation": "Tentative d'insertion ou de suppression brisant une relation d'intégrité référentielle.",
-"fix": "Assurez-vous que l'entité parente existe avant de l'associer ou supprimez les dépendances d'abord."
+"explanation": "L'opération viole une contrainte d'intégrité référentielle entre deux tables ou collections.",
+"fix": "Assurez-vous que l'entité parente existe avant de l'associer à une entité enfant."
 },
 "ERR_DB_007": {
-"name": "Pool de connexions saturé",
+"name": "ERR_DB_POOL_EXHAUSTED",
 "level": "ERROR",
-"explanation": "Toutes les connexions disponibles dans le pool applicatif sont occupées.",
-"fix": "Augmentez la taille maximale du pool (max connections) ou optimisez le temps d'exécution des requêtes."
+"explanation": "Toutes les connexions réseau disponibles dans le pool de l'application sont mobilisées.",
+"fix": "Augmentez la configuration de taille maximale du pool ou réduisez le temps de rétention des connexions."
 },
 "ERR_DB_008": {
-"name": "Migration de base de données en échec",
+"name": "ERR_DB_MIGRATION_FAILED",
 "level": "ERROR",
-"explanation": "Le script de migration de schéma contient une erreur de syntaxe ou un conflit de structure.",
-"fix": "Exécutez un rollback de la migration défaillante, corrigez le fichier SQL et rejouez le script."
+"explanation": "Le script automatisé de mise à jour de la structure de la base de données a échoué.",
+"fix": "Effectuez un rollback du schéma, corrigez la syntaxe SQL erronée et relancez la migration."
 },
 "ERR_DB_009": {
-"name": "Requête SQL malformée",
+"name": "ERR_DB_QUERY_SYNTAX_ERROR",
 "level": "ERROR",
-"explanation": "La requête générée contient une erreur de syntaxe ou cible une colonne absente.",
-"fix": "Analysez les logs bruts de l'ORM, inspectez les noms des colonnes et testez la requête manuellement."
+"explanation": "La syntaxe brute de la requête SQL ou NoSQL envoyée au serveur est malformée.",
+"fix": "Inspectez les requêtes générées dans les logs et assurez-vous de la conformité des noms de colonnes."
 },
 "ERR_DB_010": {
-"name": "Timeout de requête de base de données",
+"name": "ERR_DB_QUERY_TIMEOUT",
 "level": "ERROR",
-"explanation": "Le serveur de stockage a mis trop de temps à répondre et à retourner les résultats.",
-"fix": "Ajoutez des index sur les colonnes filtrées ou simplifiez les jointures complexes."
+"explanation": "Le traitement de la requête a été interrompu car il a dépassé le délai maximal autorisé.",
+"fix": "Ajoutez des index performants sur les colonnes filtrées et évitez les jointures volumineuses."
 },
 "ERR_DB_011": {
-"name": "Table ou collection introuvable",
+"name": "ERR_DB_TABLE_NOT_FOUND",
 "level": "ERROR",
-"explanation": "La table ciblée par l'instruction SQL n'existe pas dans le schéma courant.",
-"fix": "Vérifiez que toutes les migrations de structure ont bien été déployées sur cet environnement."
+"explanation": "La table ou la collection ciblée par l'instruction n'existe pas dans la base active.",
+"fix": "Exécutez vos scripts de migration pour initialiser la structure manquante en base de données."
 },
 "ERR_DB_012": {
-"name": "Index de recherche désynchronisé",
+"name": "ERR_DB_INDEX_OUT_OF_SYNC",
 "level": "ERROR",
-"explanation": "Le moteur de recherche textuelle externe (ex: Elasticsearch) n'est plus aligné avec la base SQL.",
-"fix": "Déclenchez une tâche de réindexation asynchrone en arrière-plan pour l'entité concernée."
+"explanation": "Un index de recherche textuelle externe ou interne est désynchronisé par rapport aux lignes réelles.",
+"fix": "Lancez une commande asynchrone de reconstruction d'index (reindexation) sur l'entité touchée."
 },
 "ERR_DB_013": {
-"name": "Transaction abandonnée manuellement",
+"name": "ERR_DB_TRANSACTION_ABORTED",
 "level": "ERROR",
-"explanation": "La transaction a été annulée de manière logicielle suite à un critère métier non respecté au milieu du processus.",
-"fix": "Aucune modification n'a été enregistrée en base. Corrigez le paramètre déclencheur."
+"explanation": "La transaction globale a été annulée logiciellement via un rollback au milieu du processus.",
+"fix": "Aucun changement n'a été appliqué en base. Analysez la cause de l'interruption dans le code métier."
 },
 "ERR_DB_014": {
-"name": "Requête non indexée (Scan complet de table)",
+"name": "ERR_DB_FULL_TABLE_SCAN",
 "level": "WARN",
-"explanation": "La requête s'exécute sans utiliser d'index, ce qui va dégrader les performances à grande échelle.",
-"fix": "Analysez le plan d'exécution (EXPLAIN) et ajoutez l'index adéquat sur les champs de filtrage."
+"explanation": "Une requête s'exécute sans indexation, obligeant le moteur à lire l'intégralité de la table.",
+"fix": "Créez un index pertinent sur les colonnes utilisées dans les clauses de filtrage (ex: WHERE, JOIN)."
 },
 "ERR_DB_015": {
-"name": "Donnée tronquée lors de l'insertion",
+"name": "ERR_DB_DATA_TRUNCATED",
 "level": "WARN",
-"explanation": "La taille de la chaîne de caractères dépasse la capacité maximale définie pour cette colonne.",
-"fix": "Augmentez la taille limite de la colonne en base ou validez la longueur du texte côté client."
+"explanation": "La taille d'une valeur texte dépasse la capacité maximale physique définie pour ce champ.",
+"fix": "Ajustez la validation de longueur côté client ou étendez le type de la colonne en base."
 },
 "ERR_DB_016": {
-"name": "Connexion à la base de données instable",
+"name": "ERR_DB_CONNECTION_INSTABILITY",
 "level": "WARN",
-"explanation": "Des micro-coupures réseau intermittentes ont été détectées avec le serveur de stockage.",
-"fix": "Activez les options de reconnexion automatique (keepAlive / autoReconnect) dans le pilote client."
+"explanation": "Des micro-coupures réseau réseau ont été détectées avec l'hôte de stockage.",
+"fix": "Activez les options de maintien de connexion (keepAlive) et de reconnexion automatique du pilote."
 },
 "ERR_DB_017": {
-"name": "Reconnexion réussie à la base de données",
+"name": "ERR_DB_RECONNECTED",
 "level": "INFO",
-"explanation": "La liaison avec le serveur de données a été rétablie après une coupure.",
-"fix": "Aucune action requise. Le trafic applicatif normal reprend son cours."
+"explanation": "La liaison réseau interrompue avec la base de données a été restaurée automatiquement.",
+"fix": "Aucune action requise. Les requêtes en attente reprennent leur exécution."
 },
 "ERR_NET_001": {
-"name": "Port réseau déjà utilisé (EADDRINUSE)",
+"name": "EADDRINUSE",
 "level": "FATAL",
-"explanation": "Le port d'écoute configuré pour démarrer le serveur est déjà occupé par une autre application.",
-"fix": "Arrêtez le processus concurrent qui occupe ce port ou modifiez le port d'écoute de votre projet."
+"explanation": "Le port réseau désigné pour l'écoute du serveur web est déjà mobilisé par une autre application.",
+"fix": "Identifiez et arrêtez le processus qui utilise ce port, ou modifiez la variable PORT du projet."
 },
 "ERR_NET_002": {
-"name": "Échec de la résolution DNS",
+"name": "ENOTFOUND",
 "level": "ERROR",
-"explanation": "Impossible de traduire le nom de domaine d'un service distant en adresse IP réelle.",
-"fix": "Vérifiez la configuration DNS de la machine ou assurez-vous de la validité de l'URL cible."
+"explanation": "La résolution DNS a échoué. Impossible de traduire le nom de domaine externe en adresse IP.",
+"fix": "Contrôlez les paramètres de vos serveurs de noms (DNS) ou la validité de l'URL cible."
 },
 "ERR_NET_003": {
-"name": "Connexion refusée (ECONNREFUSED)",
+"name": "ECONNREFUSED",
 "level": "ERROR",
-"explanation": "La machine distante existe mais rejette la connexion sur le port spécifié.",
-"fix": "Vérifiez que le service distant est démarré et qu'aucun pare-feu ne bloque l'accès."
+"explanation": "La machine cible refuse catégoriquement la connexion sur le port spécifié.",
+"fix": "Assurez-vous que le service distant est bien démarré et qu'aucun pare-feu ne bloque les flux."
 },
 "ERR_NET_004": {
-"name": "Délai de connexion dépassé (ETIMEDOUT)",
+"name": "ETIMEDOUT",
 "level": "ERROR",
-"explanation": "Le serveur distant n'a pas renvoyé de réponse dans le laps de temps alloué.",
-"fix": "Surveillez l'état du réseau ou augmentez la valeur du timeout si le service est structurellement lent."
+"explanation": "Le serveur distant n'a renvoyé aucune trame réseau dans le délai imparti.",
+"fix": "Vérifiez la charge réseau ou augmentez la valeur du timeout si la cible est structurellement lente."
 },
 "ERR_NET_005": {
-"name": "Connexion réinitialisée par le pair (ECONNRESET)",
+"name": "ECONNRESET",
 "level": "ERROR",
-"explanation": "La connexion réseau a été coupée brutalement par le serveur externe ou un routeur intermédiaire.",
-"fix": "Implémentez un mécanisme de retry et contrôlez la stabilité de votre proxy ou pare-feu."
+"explanation": "La connexion réseau active a été coupée de manière abrupte par le serveur distant ou un proxy.",
+"fix": "Mettez en place un système de réessai automatique (retry) avec une temporisation exponentielle."
 },
 "ERR_NET_006": {
-"name": "Échec de la négociation TLS/SSL",
+"name": "ERR_TLS_HANDSHAKE_TIMEOUT",
 "level": "ERROR",
-"explanation": "Impossible de sécuriser la connexion en raison d'une incompatibilité de version de chiffrement.",
-"fix": "Vérifiez que les protocoles de chiffrement (ex: TLS 1.3) sont supportés par les deux parties."
+"explanation": "La négociation sécurisée SSL/TLS a expiré avant d'avoir pu valider l'échange de clés.",
+"fix": "Vérifiez que les certificats sont à jour et que les protocoles de chiffrement sont compatibles."
 },
 "ERR_NET_007": {
-"name": "Hôte inaccessible (EHOSTUNREACH)",
+"name": "EHOSTUNREACH",
 "level": "ERROR",
-"explanation": "Aucune route réseau n'existe pour joindre l'adresse IP de destination demandée.",
-"fix": "Contrôlez la table de routage de votre machine hôte et l'état des passerelles réseau."
+"explanation": "Le système d'exploitation ne trouve aucune route réseau physique pour atteindre l'adresse IP cible.",
+"fix": "Inspectez la configuration réseau de la machine, de la passerelle et de vos tables de routage."
 },
 "ERR_NET_008": {
-"name": "Payload trop volumineux (HTTP 413)",
+"name": "ERR_HTTP_REQUEST_TIMEOUT",
 "level": "ERROR",
-"explanation": "La taille du corps de la requête HTTP dépasse le quota maximum configuré sur notre serveur.",
-"fix": "Augmentez la limite de taille acceptée par votre middleware de parsing (ex: body-parser limit)."
+"explanation": "Le corps ou les en-têtes de la requête HTTP du client ont mis trop de temps à parvenir au serveur.",
+"fix": "Configurez des limites de timeout adaptées au niveau de votre reverse proxy (Nginx, Apache)."
 },
 "ERR_NET_009": {
-"name": "Trop de requêtes émises (Rate Limit)",
+"name": "ERR_HTTP2_STREAM_ERROR",
 "level": "ERROR",
-"explanation": "L'application a envoyé trop de requêtes vers une API tierce dans un intervalle restreint.",
-"fix": "Utilisez une file d'attente (queue) pour lisser les appels ou demandez une augmentation des quotas."
+"explanation": "Un flux spécifique au sein du protocole multiplexé HTTP/2 a rencontré un dysfonctionnement.",
+"fix": "Forcez une reconnexion ou basculez temporairement le protocole en HTTP/1.1 pour isoler le bug."
 },
 "ERR_NET_010": {
-"name": "Déconnexion brutale du WebSocket",
+"name": "ERR_WEBSOCKET_CLOSED_ABRUPTLY",
 "level": "ERROR",
-"explanation": "Le canal bidirectionnel temps réel a été interrompu de manière inattendue.",
-"fix": "Le client doit initialiser un protocole de reconnexion automatique avec un délai exponentiel."
+"explanation": "Le canal persistant bidirectionnel WebSocket s'est fermé sans signal de fermeture conforme.",
+"fix": "Activez un protocole de reconnexion automatique côté client (reconnect loop)."
 },
 "ERR_NET_011": {
-"name": "En-têtes HTTP trop volumineux",
+"name": "ERR_HTTP_INVALID_HEADER_VALUE",
 "level": "ERROR",
-"explanation": "Le serveur rejette la requête car la taille combinée des headers HTTP est excessive.",
-"fix": "Nettoyez les cookies obsolètes côté client ou ajustez les paramètres d'en-tête autorisés par le serveur."
+"explanation": "Un en-tête HTTP transmis contient des caractères interdits ou est structurellement malformé.",
+"fix": "Nettoyez ou encodez correctement les valeurs insérées dans les en-têtes de requêtes."
 },
 "ERR_NET_012": {
-"name": "Erreur Gateway Timeout (HTTP 504)",
+"name": "ERR_HTTP_INVALID_STATUS_CODE",
 "level": "ERROR",
-"explanation": "Le reverse proxy ou le load balancer n'a pas reçu de réponse à temps de la part du serveur applicatif.",
-"fix": "Surveillez la charge CPU du serveur applicatif et optimisez le temps de traitement des requêtes lourdes."
+"explanation": "L'application tente de renvoyer un code de statut HTTP qui n'existe pas ou est en dehors de la plage 100-599.",
+"fix": "Corrigez la valeur passée à la fonction de réponse pour utiliser un code standard (ex: 200, 400, 500)."
 },
 "ERR_NET_013": {
-"name": "Requête HTTP non autorisée sur ce port",
+"name": "ERR_STREAM_PREMATURE_CLOSE",
 "level": "ERROR",
-"explanation": "Une tentative de connexion en clair (HTTP) a été détectée sur un port d'écoute exclusivement HTTPS.",
-"fix": "Modifiez la configuration de l'appel client pour utiliser explicitement le protocole HTTPS."
+"explanation": "Le flux de données s'est arrêté avant que la totalité du payload prévu n'ait été transmise.",
+"fix": "Contrôlez l'état de la connexion réseau ou la taille déclarée dans l'en-tête Content-Length."
 },
 "ERR_NET_014": {
-"name": "Latence réseau élevée",
+"name": "ERR_NET_HIGH_LATENCY",
 "level": "WARN",
-"explanation": "Le temps de transit réseau moyen mesuré vers un service dépasse le seuil d'avertissement.",
-"fix": "Utilisez un CDN ou rapprochez géographiquement vos serveurs de l'infrastructure cible."
+"explanation": "Le temps de transit réseau moyen (ping) mesuré vers le service distant dépasse le seuil tolérable.",
+"fix": "Utilisez un CDN ou déployez vos serveurs d'API dans la même zone géographique que vos services tiers."
 },
 "ERR_NET_015": {
-"name": "Paquets réseau corrompus détectés",
+"name": "ERR_NET_PACKET_LOSS",
 "level": "WARN",
-"explanation": "Certaines trames de données reçues sur l'interface réseau contiennent des erreurs d'intégrité.",
-"fix": "Contrôlez l'état physique du matériel réseau ou passez sur un protocole applicatif plus robuste."
+"explanation": "Des pertes de paquets de données ont été identifiées sur l'interface réseau active.",
+"fix": "Surveillez la bande passante globale de la machine et éliminez les goulots d'étranglement réseau."
 },
 "ERR_NET_016": {
-"name": "Redirection infinie (Loop)",
+"name": "ERR_HTTP_TOO_MANY_REDIRECTS",
 "level": "WARN",
-"explanation": "La requête suit une chaîne de redirections HTTP (301/302) qui boucle sur elle-même.",
-"fix": "Analysez vos règles de réécriture d'URL ou la logique de vos middlewares de routage pour briser la boucle."
+"explanation": "La requête suit une boucle infinie de redirections HTTP (301/302) et n'aboutit pas.",
+"fix": "Examinez vos règles de routage et de redirection d'URL pour identifier l'élément qui cause la boucle."
 },
 "ERR_NET_017": {
-"name": "Basculement sur le serveur de secours (Failover)",
+"name": "ERR_NET_SWITCH_TO_FAILOVER",
 "level": "INFO",
-"explanation": "Le nœud principal étant injoignable, le trafic réseau est basculé vers le serveur secondaire.",
-"fix": "Aucune action immédiate requise. Inspectez la panne sur le serveur principal dès que possible."
+"explanation": "Le nœud réseau principal étant injoignable, le trafic est redirigé vers l'infrastructure de secours.",
+"fix": "Aucune action immédiate requise. Planifiez un audit sur la cause de la panne du nœud principal."
 },
 "ERR_VAL_001": {
-"name": "Type de données incorrect",
+"name": "ERR_VALIDATION_TYPE_MISMATCH",
 "level": "ERROR",
-"explanation": "Un champ validé a reçu un type non conforme (ex: un texte à la place d'un nombre).",
-"fix": "Modifiez le format de la donnée envoyée par le client pour correspondre au schéma JSON attendu."
+"explanation": "Un champ validé par le schéma a reçu un type de données non conforme (ex: string au lieu de number).",
+"fix": "Modifiez la structure ou appliquez un transtypage de la donnée côté client avant l'envoi."
 },
 "ERR_VAL_002": {
-"name": "Champ obligatoire manquant",
+"name": "ERR_VALIDATION_MISSING_REQUIRED_FIELD",
 "level": "ERROR",
-"explanation": "Un paramètre indispensable pour exécuter la logique métier est absent du corps du message.",
-"fix": "Vérifiez la présence de l'intégralité des champs obligatoires documentés dans l'API."
+"explanation": "Un attribut indispensable à l'exécution de la logique métier est manquant dans le corps du message.",
+"fix": "Consultez la documentation de l'API et assurez-vous d'inclure tous les paramètres obligatoires."
 },
 "ERR_VAL_003": {
-"name": "Format d'email invalide",
+"name": "ERR_VALIDATION_INVALID_EMAIL",
 "level": "ERROR",
-"explanation": "L'adresse email fournie ne respecte pas les expressions régulières standards.",
-"fix": "Corrigez la saisie utilisateur en veillant à respecter la structure local@domaine.extension."
+"explanation": "La chaîne de caractères fournie ne valide pas l'expression régulière standard d'un email.",
+"fix": "Corrigez la saisie de l'utilisateur pour respecter une structure du type utilisateur@domaine.com."
 },
 "ERR_VAL_004": {
-"name": "Date hors limites logiques",
+"name": "ERR_VALIDATION_DATE_OUT_OF_BOUNDS",
 "level": "ERROR",
-"explanation": "La date fournie est située dans le passé ou dépasse la borne future maximale autorisée.",
-"fix": "Ajustez la valeur temporelle pour qu'elle respecte les contraintes fixées par les règles de gestion."
+"explanation": "La date fournie se situe en dehors des bornes temporelles logiques (ex: naissance dans le futur).",
+"fix": "Ajoutez des restrictions de calendrier sur l'interface graphique pour guider la saisie de l'utilisateur."
 },
 "ERR_VAL_005": {
-"name": "Chaîne de caractères trop courte",
+"name": "ERR_VALIDATION_STRING_TOO_SHORT",
 "level": "ERROR",
-"explanation": "La longueur du texte saisi est inférieure au nombre minimal de caractères exigé.",
-"fix": "Saisissez un texte plus long respectant la contrainte spécifiée par le validateur."
+"explanation": "Le nombre de caractères de la chaîne est inférieur au minimum requis par le validateur.",
+"fix": "Saisissez un texte plus long en adéquation avec la taille minimale attendue par le champ."
 },
 "ERR_VAL_006": {
-"name": "Chaîne de caractères trop longue",
+"name": "ERR_VALIDATION_STRING_TOO_LONG",
 "level": "ERROR",
-"explanation": "La longueur du texte saisi dépasse la limite structurelle tolérée par le système.",
-"fix": "Tronquez l'information superflue ou augmentez la validation maximale si nécessaire."
+"explanation": "La longueur du texte dépasse la capacité ou la contrainte maximale tolérée par le schéma.",
+"fix": "Réduisez la quantité de texte envoyée ou augmentez la contrainte maximale si le besoin métier évolue."
 },
 "ERR_VAL_007": {
-"name": "Valeur numérique hors plage",
+"name": "ERR_VALIDATION_NUMBER_OUT_OF_RANGE",
 "level": "ERROR",
-"explanation": "Le nombre saisi est inférieur au minimum ou supérieur au maximum autorisé.",
-"fix": "Modifiez la valeur numérique ou le curseur pour entrer dans l'intervalle de validation officiel."
+"explanation": "La valeur numérique transmise est inférieure au minimum ou supérieure au maximum autorisé.",
+"fix": "Ajustez la valeur ou utilisez un curseur de sélection bridé sur les plages autorisées."
 },
 "ERR_VAL_008": {
-"name": "Format JSON malformé",
+"name": "ERR_JSON_PARSE_ERROR",
 "level": "ERROR",
-"explanation": "Le corps de la requête ne peut pas être analysé car il viole la syntaxe standard JSON.",
-"fix": "Vérifiez la présence des guillemets doubles, des virgules de séparation et la fermeture des accolades."
+"explanation": "Le corps de la requête HTTP est illisible car il enfreint les règles de syntaxe standards du JSON.",
+"fix": "Vérifiez le formatage des données (présence des guillemets doubles, absence de virgule traînante)."
 },
 "ERR_VAL_009": {
-"name": "Format de fichier non supporté",
+"name": "ERR_VALIDATION_UNSUPPORTED_FILE_TYPE",
 "level": "ERROR",
-"explanation": "Le fichier téléversé possède une extension ou un type MIME interdit (ex: .exe au lieu de .pdf).",
-"fix": "Convertissez le fichier dans un format explicitement autorisé avant de soumettre à nouveau le formulaire."
+"explanation": "Le fichier téléversé possède une extension ou un type MIME qui ne figure pas dans la liste blanche.",
+"fix": "Bloquez l'envoi de ce format côté client et n'acceptez que les extensions autorisées (ex: .jpg, .pdf)."
 },
 "ERR_VAL_010": {
-"name": "UUID malformé",
+"name": "ERR_VALIDATION_INVALID_UUID",
 "level": "ERROR",
-"explanation": "L'identifiant unique transmis ne respecte pas la structure hexadécimale d'un UUID v4 valide.",
-"fix": "Assurez-vous que l'ID envoyé provient d'un générateur conforme aux spécifications UUID."
+"explanation": "L'identifiant unique transmis ne respecte pas le format hexadécimal normé d'un UUID v4.",
+"fix": "Assurez-vous que l'ID transmis provient bien d'un générateur conforme aux spécifications UUID."
 },
 "ERR_VAL_011": {
-"name": "Code postal invalide",
+"name": "ERR_VALIDATION_INVALID_POSTAL_CODE",
 "level": "ERROR",
-"explanation": "Le code postal ne correspond pas au format géographique ou syntaxique du pays sélectionné.",
-"fix": "Ajustez le code postal en fonction du pays (ex: 5 chiffres pour la France, format alphanumérique pour le Canada)."
+"explanation": "Le code postal ne correspond pas au masque de validation du pays sélectionné.",
+"fix": "Adaptez la validation selon le pays (ex: 5 chiffres pour la France, alphanumérique pour le Royaume-Uni)."
 },
 "ERR_VAL_012": {
-"name": "Coordonnées GPS invalides",
+"name": "ERR_VALIDATION_INVALID_COORDINATES",
 "level": "ERROR",
-"explanation": "La latitude ou la longitude fournie se situe en dehors de la grille géographique terrestre.",
-"fix": "Fournissez une latitude valide comprise entre -90 et 90, et une longitude entre -180 et 180."
+"explanation": "Les valeurs de géolocalisation se situent en dehors de la grille de coordonnées terrestres.",
+"fix": "Fournissez une latitude valide (entre -90 et 90) ainsi qu'une longitude valide (entre -180 et 180)."
 },
 "ERR_VAL_013": {
-"name": "Format de couleur hexadécimal invalide",
+"name": "ERR_VALIDATION_INVALID_HEX_COLOR",
 "level": "ERROR",
-"explanation": "La couleur CSS soumise ne respecte pas le format standard de hachage (ex: #FFFFFF).",
-"fix": "Assurez-vous que la chaîne commence par un symbole '#' et contient exactement 3 ou 6 caractères hexadécimaux."
+"explanation": "La chaîne de couleur CSS soumise ne respecte pas le format hexadécimal standard.",
+"fix": "Vérifiez que la chaîne débute par '#' et comporte exactement 3, 4, 6 ou 8 caractères hexadécimaux."
 },
 "ERR_VAL_014": {
-"name": "Paramètre inconnu ignoré",
+"name": "ERR_VALIDATION_UNKNOWN_PROPERTY",
 "level": "WARN",
-"explanation": "Le client a transmis des champs additionnels non définis dans le schéma de validation.",
-"fix": "Nettoyez l'objet côté client pour ne faire transiter que les propriétés attendues par l'API."
+"explanation": "La requête contient des propriétés superflues non définies dans le schéma de validation.",
+"fix": "Filtrez et nettoyez l'objet côté client pour ne faire transiter que les données attendues par l'API."
 },
 "ERR_VAL_015": {
-"name": "Numéro de téléphone non normalisé",
+"name": "ERR_VALIDATION_PHONE_NOT_NORMALIZED",
 "level": "WARN",
-"explanation": "Le numéro de téléphone a été reçu sans l'indicatif international requis (format E.164).",
-"fix": "Le serveur va tenter un formatage automatique. Privilégiez une saisie normalisée (ex: +336...)."
+"explanation": "Le numéro de téléphone a été transmis sans son indicatif international au format E.164.",
+"fix": "Le serveur va appliquer un reformatage automatique, mais privilégiez une saisie normalisée à la source."
 },
 "ERR_VAL_016": {
-"name": "Espaces superflus détectés",
+"name": "ERR_VALIDATION_WHITESPACE_TRIMMED",
 "level": "WARN",
-"explanation": "Des espaces vides en début ou fin de chaîne ont été détectés dans des champs textuels.",
-"fix": "Le serveur applique automatiquement un nettoyage (.trim()) sur les chaînes reçues."
+"explanation": "Des espaces vides inutiles ont été détectés au début ou à la fin d'un champ textuel.",
+"fix": "Aucune action requise, le système applique automatiquement la méthode .trim() sur la chaîne reçue."
 },
 "ERR_VAL_017": {
-"name": "Validation réussie",
+"name": "ERR_VALIDATION_SUCCESS",
 "level": "INFO",
-"explanation": "L'intégralité du payload de la requête est conforme au schéma de données.",
-"fix": "Aucune action requise. Poursuite automatique du traitement de la requête."
+"explanation": "L'intégralité du payload analysé est en parfaite conformité avec le contrat d'interface.",
+"fix": "Aucune action requise. Poursuite automatique du cycle de vie de la requête."
 },
 "ERR_API_001": {
-"name": "Passerelle de paiement indisponible",
+"name": "ERR_EXTERNAL_GATEWAY_UNAVAILABLE",
 "level": "ERROR",
-"explanation": "L'API externe chargée du paiement (ex: Stripe) renvoie une erreur 503 ou est injoignable.",
-"fix": "Basculez temporairement sur un mode de paiement secondaire ou invitez l'utilisateur à réessayer."
+"explanation": "Le service tiers chargé du traitement des paiements (ex: Stripe) est injoignable.",
+"fix": "Basculez automatiquement sur une solution de paiement secondaire ou invitez l'utilisateur à réessayer."
 },
 "ERR_API_002": {
-"name": "Clé d'API tierce révoquée",
+"name": "ERR_EXTERNAL_API_KEY_REVOKED",
 "level": "ERROR",
-"explanation": "Le fournisseur de service externe refuse nos identifiants d'accès globaux.",
-"fix": "Vérifiez le statut de la clé sur le tableau de bord du fournisseur tiers et mettez à jour votre configuration."
+"explanation": "Le fournisseur d'API distant rejette nos identifiants d'accès globaux de plateforme.",
+"fix": "Vérifiez l'état de la clé d'API sur la console du fournisseur tiers et mettez à jour votre configuration."
 },
 "ERR_API_003": {
-"name": "Quota d'appels API tiers dépassé",
+"name": "ERR_EXTERNAL_API_QUOTA_EXCEEDED",
 "level": "ERROR",
-"explanation": "La limite de requêtes autorisée par le contrat du fournisseur tiers a été atteinte.",
-"fix": "Passez au forfait supérieur chez le fournisseur ou réduisez la fréquence d'appel à l'aide d'un cache local."
+"explanation": "Le quota d'appels ou la limite de requêtes autorisée par le forfait tiers a été atteint.",
+"fix": "Mettez en place un système de cache pour espacer les appels ou souscrivez à l'offre supérieure."
 },
 "ERR_API_004": {
-"name": "Erreur interne du service tiers (HTTP 500)",
+"name": "ERR_EXTERNAL_INTERNAL_SERVER_ERROR",
 "level": "ERROR",
-"explanation": "Le service externe a rencontré une anomalie lors du traitement de notre demande.",
-"fix": "Gérez l'exception proprement, informez l'utilisateur et planifiez une tâche de réessai ultérieure."
+"explanation": "L'infrastructure externe a rencontré une panne interne (HTTP 500) lors du traitement.",
+"fix": "Gérez l'exception de manière isolée pour éviter de faire planter l'application principale."
 },
 "ERR_API_005": {
-"name": "Échec de l'envoi de l'email",
+"name": "ERR_SMTP_SEND_FAILED",
 "level": "ERROR",
-"explanation": "Le serveur SMTP ou le service de routage d'emails (ex: SendGrid) a rejeté le message.",
-"fix": "Contrôlez la configuration SMTP, la réputation de votre domaine et la validité de l'adresse destinataire."
+"explanation": "Le service de routage de courriels (ex: SendGrid, Mailgun) a rejeté l'envoi du message.",
+"fix": "Contrôlez vos configurations SMTP, la réputation de vos IP et l'état de validité du destinataire."
 },
 "ERR_API_006": {
-"name": "Échec de l'envoi du SMS",
+"name": "ERR_SMS_GATEWAY_DELIVERY_FAILED",
 "level": "ERROR",
-"explanation": "La passerelle de télécommunication SMS n'a pas pu acheminer le message au destinataire.",
-"fix": "Vérifiez le solde de votre compte tiers et la conformité internationale du numéro de téléphone."
+"explanation": "La passerelle de télécommunication n'a pas pu acheminer le SMS vers le terminal mobile.",
+"fix": "Vérifiez le solde de crédits de votre compte tiers et la validité du format international du numéro."
 },
 "ERR_API_007": {
-"name": "Webhook externe malformé",
+"name": "ERR_WEBHOOK_MALFORMED_PAYLOAD",
 "level": "ERROR",
-"explanation": "Les données reçues sur notre route d'écoute de webhook ne respectent plus le format attendu.",
-"fix": "Mettez à jour votre contrôleur de traitement pour prendre en compte les modifications de l'API externe."
+"explanation": "Les données reçues sur la route d'écoute de webhook tierce ne respectent pas le format connu.",
+"fix": "Modifiez votre contrôleur de réception pour prendre en compte les changements de version de l'API externe."
 },
 "ERR_API_008": {
-"name": "Signature du Webhook invalide",
+"name": "ERR_WEBHOOK_SIGNATURE_VERIFICATION_FAILED",
 "level": "ERROR",
-"explanation": "La vérification de la signature cryptographique intégrée aux en-têtes du webhook a échoué.",
-"fix": "Rejetez immédiatement la requête. Assurez-vous que le secret de signature configuré est correct."
+"explanation": "La signature cryptographique reçue dans les en-têtes du webhook tiers est invalide.",
+"fix": "Rejetez immédiatement l'appel. Assurez-vous que le secret de signature configuré est le bon."
 },
 "ERR_API_009": {
-"name": "Service de cartographie indisponible",
+"name": "ERR_MAPS_GEOCODING_FAILED",
 "level": "ERROR",
-"explanation": "L'API externe de géocodage ou d'affichage de cartes ne répond pas aux appels.",
-"fix": "Mettez en place un système de repli ou désactivez temporairement l'autocomplétion des adresses."
+"explanation": "L'API externe de cartographie ne parvient pas à traduire l'adresse textuelle en coordonnées GPS.",
+"fix": "Vérifiez la syntaxe de l'adresse soumise ou proposez une saisie manuelle alternative des coordonnées."
 },
 "ERR_API_010": {
-"name": "Données d'authentification OAuth2 expirées",
+"name": "ERR_OAUTH_REFRESH_TOKEN_FAILED",
 "level": "ERROR",
-"explanation": "Le token d'accès lié à l'intégration d'un utilisateur a expiré et le refresh token a échoué.",
-"fix": "Demandez explicitement à l'utilisateur de réautoriser l'application depuis son espace tiers."
+"explanation": "La tentative de renouvellement automatique du jeton d'accès utilisateur via l'intégration tierce a échoué.",
+"fix": "Affichez une notification demandant explicitement à l'utilisateur de réautoriser l'application."
 },
 "ERR_API_011": {
-"name": "Format de réponse tiers inattendu",
+"name": "ERR_EXTERNAL_UNEXPECTED_RESPONSE_STRUCTURE",
 "level": "ERROR",
-"explanation": "L'API externe a répondu avec succès (200) mais la structure de l'objet de données a changé.",
-"fix": "Adaptez le parser de données pour supporter la nouvelle structure introduite par le fournisseur tiers."
+"explanation": "L'API externe a répondu avec un statut de succès mais l'objet retourné a changé de structure.",
+"fix": "Adaptez votre code d'analyse de données (parsing) pour intégrer les modifications du fournisseur."
 },
 "ERR_API_012": {
-"name": "Échec d'authentification Single Sign-On (SSO)",
+"name": "ERR_SSO_AUTHENTICATION_FAILED",
 "level": "ERROR",
-"explanation": "Le fournisseur d'identité d'entreprise (ex: Okta, Azure AD) a rejeté la demande d'authentification.",
-"fix": "Vérifiez la configuration des protocoles SAML/OIDC et la validité du certificat d'entreprise."
+"explanation": "Le fournisseur d'identité d'entreprise (SAML/OIDC) refuse de valider la demande de connexion.",
+"fix": "Contrôlez les certificats d'échange ainsi que la configuration des redirections chez le fournisseur SSO."
 },
 "ERR_API_013": {
-"name": "Réponse lente de l'API tierce",
+"name": "ERR_EXTERNAL_SLOW_RESPONSE",
 "level": "WARN",
-"explanation": "Le service externe répond au-delà du seuil de performance nominal habituel.",
-"fix": "Activez un cache temporaire agressif sur les données froides pour limiter le nombre d'appels en temps réel."
+"explanation": "Le temps de réponse global du service externe dépasse le seuil nominal habituel.",
+"fix": "Activez un cache agressif de courte durée sur les données froides pour limiter la dépendance en temps réel."
 },
 "ERR_API_014": {
-"name": "Changement de version mineure de l'API externe",
+"name": "ERR_EXTERNAL_DEPRECATION_WARNING",
 "level": "WARN",
-"explanation": "Une modification mineure ou un avertissement de dépréciation a été détecté dans les en-têtes tiers.",
-"fix": "Planifiez une mise à jour mineure de votre code d'intégration pour rester en parfaite conformité."
+"explanation": "Une alerte de dépréciation de version d'API a été détectée au sein des en-têtes de réponse du tiers.",
+"fix": "Planifiez une tâche de mise à jour du SDK ou de l'intégration pour basculer vers la version d'API récente."
 },
 "ERR_API_015": {
-"name": "Service de notification push dégradé",
+"name": "ERR_PUSH_NOTIFICATION_DEGRADED",
 "level": "WARN",
-"explanation": "Le service Firebase (FCM) ou Apple (APNs) rencontre des ralentissements globaux.",
-"fix": "Les notifications push sortantes sont placées dans une file d'attente locale en attendant le retour à la normale."
+"explanation": "Le service de notification push (Firebase FCM ou Apple APNs) subit des ralentissements mondiaux.",
+"fix": "Les notifications push sortantes sont placées dans une file d'attente locale le temps du retour à la normale."
 },
 "ERR_API_016": {
-"name": "Données météo indisponibles",
+"name": "ERR_WEATHER_DATA_UNAVAILABLE",
 "level": "WARN",
-"explanation": "L'API météo tierce est en panne ou ne dispose d'aucune donnée pour la zone géographique demandée.",
-"fix": "Affichez une valeur par défaut neutre ou masquez temporairement le bloc météo sur l'interface."
+"explanation": "L'API météo externe ne renvoie aucune donnée pour les coordonnées géographiques transmises.",
+"fix": "Affichez une valeur par défaut neutre sur l'interface graphique ou masquez discrètement le bloc."
 },
 "ERR_API_017": {
-"name": "Synchronisation réussie avec le CRM",
+"name": "ERR_CRM_SYNC_SUCCESS",
 "level": "INFO",
-"explanation": "Les données clients ont été poussées et synchronisées sans accroc avec l'outil de gestion tiers.",
+"explanation": "Le flux asynchrone de synchronisation des données clients vers l'outil CRM s'est achevé avec succès.",
 "fix": "Aucune action requise."
 },
 "ERR_BUS_001": {
-"name": "Solde insuffisant",
+"name": "ERR_BUSINESS_INSUFFICIENT_FUNDS",
 "level": "ERROR",
-"explanation": "L'utilisateur tente d'effectuer une transaction alors que son crédit est insuffisant.",
-"fix": "Invitez l'utilisateur à recharger son compte ou à sélectionner un autre moyen de paiement."
+"explanation": "L'utilisateur tente d'initier un achat alors que le solde de son compte est inférieur au montant requis.",
+"fix": "Bloquez l'action et proposez à l'utilisateur de recharger son compte ou de changer de moyen de paiement."
 },
 "ERR_BUS_002": {
-"name": "Stock épuisé",
+"name": "ERR_BUSINESS_OUT_OF_STOCK",
 "level": "ERROR",
-"explanation": "L'article demandé n'est plus disponible dans l'inventaire au moment de la validation finale.",
-"fix": "Retirez automatiquement l'article du panier ou proposez un produit similaire de substitution."
+"explanation": "L'inventaire pour cet article est tombé à zéro entre sa mise au panier et la tentative de paiement.",
+"fix": "Retirez l'élément du panier et invitez l'utilisateur à sélectionner une variante ou un autre article."
 },
 "ERR_BUS_003": {
-"name": "Code promotionnel expiré",
+"name": "ERR_BUSINESS_PROMO_CODE_EXPIRED",
 "level": "ERROR",
-"explanation": "Le code de réduction saisi par l'utilisateur a dépassé sa date limite d'utilisation.",
-"fix": "Informez l'utilisateur que l'offre commerciale a expiré et invitez-le à utiliser un autre code."
+"explanation": "Le code promotionnel saisi n'est plus actif car la date limite de validité de l'offre est dépassée.",
+"fix": "Affichez un message informant de la fin de l'offre et recalculez le panier au tarif normal."
 },
 "ERR_BUS_004": {
-"name": "Action métier déjà effectuée",
+"name": "ERR_BUSINESS_INVALID_STATE_TRANSITION",
 "level": "ERROR",
-"explanation": "L'état actuel de l'entité interdit de rejouer cette action (ex: valider une commande déjà expédiée).",
-"fix": "Bloquez l'action au niveau de l'interface graphique et renvoyez une erreur de workflow logique."
+"explanation": "L'état actuel de l'entité interdit de rejouer cette action (ex: annuler un colis déjà expédié).",
+"fix": "Verrouillez l'action sur le plan de l'interface et renvoyez une erreur de flux de gestion."
 },
 "ERR_BUS_005": {
-"name": "Limite d'abonnements utilisateurs atteinte",
+"name": "ERR_BUSINESS_LICENSE_LIMIT_REACHED",
 "level": "ERROR",
-"explanation": "L'organisation a atteint le nombre maximum de collaborateurs autorisés par son forfait.",
-"fix": "Proposez à l'administrateur de mettre à niveau son abonnement vers l'offre supérieure."
+"explanation": "L'organisation a atteint le nombre maximal de comptes collaborateurs autorisés par son forfait.",
+"fix": "Invitez l'administrateur de l'organisation à faire évoluer son abonnement vers l'offre supérieure."
 },
 "ERR_BUS_006": {
-"name": "Zone géographique non desservie",
+"name": "ERR_BUSINESS_SHIPPING_ZONE_NOT_SUPPORTED",
 "level": "ERROR",
-"explanation": "L'adresse de livraison fournie n'est pas couverte par notre réseau de transporteurs.",
-"fix": "Demandez une autre adresse de livraison ou proposez un point de retrait partenaire agréé."
+"explanation": "L'adresse de livraison renseignée n'est pas couverte par les transporteurs partenaires.",
+"fix": "Proposez une livraison dans un point de retrait partenaire ou demandez une adresse alternative."
 },
 "ERR_BUS_007": {
-"name": "Devise monétaire non supportée",
+"name": "ERR_BUSINESS_CURRENCY_NOT_SUPPORTED",
 "level": "ERROR",
-"explanation": "La transaction est initiée dans une devise qui n'est pas acceptée par le compte bancaire cible.",
+"explanation": "La transaction a été demandée dans une devise monétaire non acceptée par la banque du commerçant.",
 "fix": "Proposez une conversion automatique dans votre devise de référence ou bloquez le traitement."
 },
 "ERR_BUS_008": {
-"name": "Panier d'achat vide",
+"name": "ERR_BUSINESS_EMPTY_CART",
 "level": "ERROR",
-"explanation": "La validation de la commande a échoué car aucun article n'est présent dans le panier.",
-"fix": "Redirigez l'utilisateur vers le catalogue de produits pour réinitialiser le processus d'achat."
+"explanation": "La validation de la commande a échoué car aucun produit n'est présent au sein du panier d'achat.",
+"fix": "Redirigez l'utilisateur vers le catalogue général pour réinitialiser le parcours de vente."
 },
 "ERR_BUS_009": {
-"name": "Éligibilité à l'offre promotionnelle invalide",
+"name": "ERR_BUSINESS_PROMO_INELIGIBILITY",
 "level": "ERROR",
-"explanation": "L'utilisateur ne remplit pas l'intégralité des critères requis pour bénéficier de cette offre.",
-"fix": "Vérifiez les conditions d'attribution de l'offre (ex: réservé exclusivement aux nouveaux clients)."
+"explanation": "L'utilisateur ne remplit pas l'ensemble des conditions requises pour bénéficier de cette promotion.",
+"fix": "Rappelez les critères d'application du code de réduction (ex: réservé aux commandes de plus de 50€)."
 },
 "ERR_BUS_010": {
-"name": "Limite de retraits hebdomadaires atteinte",
+"name": "ERR_BUSINESS_WITHDRAWAL_LIMIT_EXCEEDED",
 "level": "ERROR",
-"explanation": "L'utilisateur a dépassé le montant maximum de retrait autorisé sur une période glissante de 7 jours.",
-"fix": "Invitez l'utilisateur à patienter jusqu'à la réinitialisation du plafond ou à contacter le support."
+"explanation": "L'utilisateur dépasse le montant maximal de retrait autorisé sur une période glissante de 7 jours.",
+"fix": "Invitez l'utilisateur à patienter jusqu'à la réinitialisation de son plafond hebdomadaire."
 },
 "ERR_BUS_011": {
-"name": "Tentative d'annulation hors délai",
+"name": "ERR_BUSINESS_CANCELLATION_DEADLINE_PASSED",
 "level": "WARN",
-"explanation": "L'utilisateur tente d'annuler une réservation alors que la politique de remboursement est dépassée.",
-"fix": "Refusez l'annulation automatique ou appliquez les frais de pénalité prévus dans les CGV."
+"explanation": "L'utilisateur tente d'annuler une réservation alors que la politique d'annulation gratuite est expirée.",
+"fix": "Refusez le remboursement intégral automatique ou appliquez les frais de pénalité contractuels."
 },
 "ERR_BUS_012": {
-"name": "Profil utilisateur incomplet pour cette action",
+"name": "ERR_BUSINESS_INCOMPLETE_USER_PROFILE",
 "level": "WARN",
-"explanation": "L'utilisateur tente de publier du contenu sur la plateforme sans avoir validé ses informations.",
-"fix": "Redirigez l'utilisateur directement vers le formulaire d'achèvement de profil obligatoire."
+"explanation": "L'utilisateur tente de publier une annonce sans avoir validé ses informations obligatoires.",
+"fix": "Redirigez l'utilisateur directement vers le formulaire d'achèvement de profil pour débloquer l'action."
 },
 "ERR_BUS_013": {
-"name": "Seuil d'alerte de sécurité dépassé",
+"name": "ERR_BUSINESS_SUSPICIOUS_ACTIVITY_TRIGGER",
 "level": "WARN",
-"explanation": "Le compte a déclenché une série d'actions inhabituelles successives sans être bloquant.",
-"fix": "Une alerte a été envoyée automatiquement à l'équipe de modération interne pour vérification manuelle."
+"explanation": "Le compte utilisateur a déclenché une série d'actions inhabituelles successives sans être bloquant.",
+"fix": "Une alerte a été envoyée automatiquement à l'équipe de modération interne pour un contrôle manuel."
 }
 }
