@@ -1,7 +1,7 @@
 const os = require('os');
 const bytes = require('bytes');
 const fs = require('fs/promises');
-const error = require('./errors.js');
+const errors_library = require('./errors.json');
 
 async function getStats() {
     try{
@@ -51,7 +51,21 @@ async function getStats() {
         
 
     } catch (e) {
-       const errorCode = e.code;
+       const errorData = errors_library.find(data => data.name === e.code)
+
+         if (errorData) {
+
+         const errorCode = errorData.internal_id;
+        const heure = new Date().toTimeString().slice(0, 8);
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\n====INFORMATIONS TECHNIQUES====\n Code erreur : ${errorCode}\nHeure d'évènement : ${heure}`);
+    
+         const nice_error = JSON.stringify(e);
+         const log_error = `- ERREUR ${errorCode} du ${heure} :\n\n${nice_error}\n`
+         await fs.appendFile('errors.log', log_error, 'utf-8');
+
+            } else {
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\nImpossible de trouver le code erreur. Voici l'erreur brute :\n===\n\n`, e)
+            }
 
         
     }
