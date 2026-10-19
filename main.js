@@ -1,5 +1,7 @@
 const os = require('os');
 const bytes = require('bytes');
+const fs = require('fs/promises');
+const error = require('./errors.js');
 
 async function getStats() {
     try{
@@ -49,7 +51,8 @@ async function getStats() {
         
 
     } catch (e) {
-        console.log(`Oops, une erreur est survenue\nCode erreur :`, e);
+       const errorCode = e.code;
+
         
     }
 } 
