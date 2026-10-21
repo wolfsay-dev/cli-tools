@@ -71,4 +71,83 @@ async function getStats() {
     }
 } 
 
-getStats();
+async function help() {
+    try {
+
+        console.log(`========== COMMANDES DISPONIBLES ==========`);
+        console.log(`node main.js   => Exécute le programme d'analyse de l'ordinateur`);
+        console.log(`node main.js help => Obtenir de l'aide`);
+        console.log(`node main.js error [CODE] => Permet d'obtenir l'erreur complète d'après un code erreur`);
+
+    } catch (e) {
+         const errorData = errors_library.find(data => data.name === e.code)
+
+         if (errorData) {
+
+         const errorCode = errorData.internal_id;
+        const heure = new Date().toTimeString().slice(0, 8);
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\n====INFORMATIONS TECHNIQUES====\n Code erreur : ${errorCode}\nHeure d'évènement : ${heure}`);
+    
+         const nice_error = JSON.stringify(e);
+         const log_error = `- ERREUR ${errorCode} du ${heure} :\n\n${nice_error}\n`
+         await fs.appendFile('errors.log', log_error, 'utf-8');
+
+            } else {
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\nImpossible de trouver le code erreur. Voici l'erreur brute :\n===\n\n`, e)
+            }
+
+    }
+}
+
+async function errorCode() {
+    try {
+
+        const code = process.argv[3];
+        const error = errors_library.find(data => data.internal_id === code)
+
+        const name = error.name
+        const level = error.level
+        const explanation = error.explanation
+        const fix = error.fix 
+
+        console.log(`========== RAPPORT D'ERREUR ==========`);
+        console.log(`\nCode erreur : ${code}`)
+        console.log(`\nNom de l'erreur : ${name}\nNiveau : ${level}\nExplication de l'erreur : ${explanation}\nVoici comment vous pourriez la résoudre : ${fix}`);
+        console.log(`\n==== © CLI TOOLS - 2026`);
+        
+        
+        
+        
+    } catch (e) {
+          const errorData = errors_library.find(data => data.name === e.code)
+
+         if (errorData) {
+
+         const errorCode = errorData.internal_id;
+        const heure = new Date().toTimeString().slice(0, 8);
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\n====INFORMATIONS TECHNIQUES====\n Code erreur : ${errorCode}\nHeure d'évènement : ${heure}`);
+    
+         const nice_error = JSON.stringify(e);
+         const log_error = `- ERREUR ${errorCode} du ${heure} :\n\n${nice_error}\n`
+         await fs.appendFile('errors.log', log_error, 'utf-8');
+
+            } else {
+         console.log(`Oops, une erreur innatendue s'est produite :/\n\nImpossible de trouver le code erreur. Voici l'erreur brute :\n===\n\n`, e)
+            }
+    }
+}
+
+
+
+if (!process.argv[2]) {
+
+    getStats();
+
+} else if (process.argv[2] === 'help') {
+    help();
+} else if (process.argv[2] === 'error' && !process.argv[3]) {
+    console.log(`Merci de renseigner un code d'erreur`);
+    
+} else if (process.argv[2] === 'error' && process.argv[3]) { 
+    errorCode();
+}
