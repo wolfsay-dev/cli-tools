@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const os = require('os');
 const bytes = require('bytes');
 const fs = require('fs/promises');
@@ -75,9 +76,9 @@ async function help() {
     try {
 
         console.log(`========== COMMANDES DISPONIBLES ==========`);
-        console.log(`node main.js   => Exécute le programme d'analyse de l'ordinateur`);
-        console.log(`node main.js help => Obtenir de l'aide`);
-        console.log(`node main.js error [CODE] => Permet d'obtenir l'erreur complète d'après un code erreur`);
+        console.log(`tools start => Exécute le programme d'analyse de l'ordinateur`);
+        console.log(`tools help => Obtenir de l'aide`);
+        console.log(`tools error [CODE] => Permet d'obtenir l'erreur complète d'après un code erreur`);
 
     } catch (e) {
          const errorData = errors_library.find(data => data.name === e.code)
@@ -138,8 +139,13 @@ async function errorCode() {
 }
 
 
-
 if (!process.argv[2]) {
+
+    console.log(`========== CLI TOOLS ==========`);
+    console.log(`Bienvenue dans l'outil CLI TOOLS`);
+    console.log(`Effectuez la commande "tools help" pour commencer`);
+     console.log(`\n==== © CLI TOOLS - 2026`);  
+} else if (process.argv[2] === `start`) {
 
     getStats();
 

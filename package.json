@@ -1,6 +1,9 @@
 {
   "name": "cli-tools",
   "version": "1.0.0",
+  "bin": {
+    "tools": "./main.js"
+  },
   "description": "",
   "homepage": "https://github.com/wolfsay-dev/cli-tools#readme",
   "bugs": {
