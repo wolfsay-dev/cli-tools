@@ -3,27 +3,78 @@ const os = require('os');
 const bytes = require('bytes');
 const fs = require('fs/promises');
 const errors_library = require('./errors.json');
-
 async function getStats() {
     try{
 
         ////////////////////////////// MEMORY ////////////////////////
-        const total_mem_b = os.totalmem();
-        const free_mem_b = os.freemem();
-        const used_mem_b = total_mem_b - free_mem_b
+        console.log(`========== CLI TOOLS ==========`);
+        console.log(`Analyse de la RAM sur 5 secondes`);
 
-        const total_mem = bytes.format(total_mem_b);
+            
+
+         let total_mem_b = 0;
+        let free_mem_b = 0;
+        let used_mem_b = 0;
+
+        let loop = 0;
+
+        const mem_history = {
+    total: [],
+    free: [],
+    used: []
+};
+
+
+
+       await new Promise((resolve) => {
+         const mem_loop = setInterval(() => {
+            console.log(`=====Analyse...`);
+
+            
+            loop++
+
+             const current_total = os.totalmem();
+            const current_free = os.freemem();
+             const current_used = current_total - current_free;
+
+              mem_history.total.push(current_total);
+             mem_history.free.push(current_free);
+              mem_history.used.push(current_used);
+
+
+                  if (loop === 5) {
+        clearInterval(mem_loop);
+        console.log(`=Analyse de la RAM terminée`);
+        resolve()
+        
+                  }
+
+        },1000 )
+
+       })
+
+        console.log(`=====Analyse des résultats`);
+        
+        const calculerMoyenne = (tableau) => tableau.reduce((acc, val) => acc + val, 0) / tableau.length;
+        
+        total_mem_b = calculerMoyenne(mem_history.total);
+        free_mem_b = calculerMoyenne(mem_history.free);
+        used_mem_b = calculerMoyenne(mem_history.used);
+        
+        const total_mem = bytes.format(total_mem_b)
         const free_mem = bytes.format(free_mem_b);
         const used_mem = bytes.format(used_mem_b);
+
+        const mem_charge = Math.round((used_mem_b / total_mem_b) * 100)
+        
+    
 
          ////////////////////////////// CPU ////////////////////////
          const cpu = os.cpus();
          
          const cpu_model = cpu[0].model;
          const cpu_speed = cpu[0].speed;
-
-         
-         
+           
          
           ////////////////////////////// Operating Sys ////////////////////////
           const uptime_b = os.uptime() 
@@ -33,19 +84,32 @@ async function getStats() {
 
           const uptime = `${Math.round(uptime_b / 60)} minutes`;
           
+       ////////////////////////////// Analyse des résultats ////////////////////////
+
+       let mem_state;
+
+       if (mem_charge >= 80) {
+        mem_state= `RAM surchargée`
+       } else {
+        mem_state= `Utilisation normale de la RAM`
+       }
+
 
     /////////////////////////////////////////////////////////////////////
 
-        console.log(`================= STATS DU PC =================`);
+        console.log(`================= SPECS DU PC =================`);
         console.log(`===== OS =====`);
         console.log(`Système d'exploitation : ${type}, ${version}\nPlateforme : ${plateform}\nLancé depuis : ${uptime}`);
         console.log(`===== Hardware =====`);
         console.log(`Processeur : ${cpu_model}\nVitesse actuelle (MHz): ${cpu_speed}\n\n Mémoire total : ${total_mem}\nMémoire utilisée : ${free_mem}\nMémoire disponible : ${used_mem}`);
+        console.log(`================= PERFORMANCES ACTUELLES =================`);
+        console.log(`RAM utilisée : ${mem_charge}%`);
+        console.log(`Etat : ${mem_state}`);
         console.log(`==============================================`);
         console.log(`\n © CLI TOOLS - 2026`);
         
         
-        
+
         
         
         
