@@ -3,8 +3,7 @@ node_modules/
 
 # Terraform
 .terraform/
+terraform-infra/.terraform/
 *.tfstate
 *.tfstate.*
-crash.log
 *.tfvars
-.terraform.lock.hcl
