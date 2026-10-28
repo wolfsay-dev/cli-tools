@@ -4,17 +4,17 @@
 
     # Goals
 
-    - Learn how to build a simply JavaScript CLI Programm, using fs, path, other libraries, loops ans Node.js "os" function
+    - Learn how to build a simple JavaScript CLI Programm, using fs, path, other libraries, loops ans Node.js "os" function
     - Learn how to use AWS, Instances and Terraform
-    - Learn GitHub, push, pull, commits, GitHub Actions
+    - Learn GitHub workflow
     - Learn SSH, Keys, Connections
 
     # Under Development
 
-    This project is currently under development. 
+    This project is currently **under development**. 
 
     # Licence
 
-    This project is open-source, under Apache 2.0 license.
+    This project is open-source and avaible under the **Apache 2.0 License**.
 
     --
