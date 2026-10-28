@@ -1,20 +1,20 @@
-    # PC Health Check CLI
+# PC Health Check CLI
 
-    A command-line project that checks a PC's health and generates a detailed report. Stundent project, aim to train JavaScript, IaC (Terraform), AWS Instances, and GitHub (Repo, Commits, Actions) skills.
+A command-line project that checks a PC's health and generates a detailed report. Stundent project, aim to train JavaScript, IaC (Terraform), AWS Instances, and GitHub (Repo, Commits, Actions) skills.
 
-    # Goals
+# Goals
 
-    - Learn how to build a simple JavaScript CLI Programm, using fs, path, other libraries, loops ans Node.js "os" function
-    - Learn how to use AWS, Instances and Terraform
-    - Learn GitHub workflow
-    - Learn SSH, Keys, Connections
+- Learn how to build a simple JavaScript CLI Programm, using fs, path, other libraries, loops ans Node.js "os" function
+- Learn how to use AWS, Instances and Terraform
+- Learn GitHub workflow
+- Learn SSH, Keys, Connections
 
-    # Under Development
+# Under Development
 
-    This project is currently **under development**. 
+This project is currently **under development**. 
 
-    # Licence
+# Licence
 
-    This project is open-source and avaible under the **Apache 2.0 License**.
+This project is open-source and avaible under the **Apache 2.0 License**.
 
-    --
+--
