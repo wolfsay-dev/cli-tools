@@ -9,9 +9,9 @@ A command-line project that checks a PC's health and generates a detailed report
 - Learn GitHub workflow
 - Learn SSH, Keys, Connections
 
-# Under Development
+# Closed Project
 
-This project is currently **under development**. 
+This project is currently **paused**. 
 
 # Licence
 
